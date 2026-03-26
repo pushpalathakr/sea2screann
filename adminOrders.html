@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Orders</title>
+	<style>
+       /* 🌐 COMMON BODY */
+body {
+font-family: Arial, sans-serif;
+background: #f4f6f8;
+margin: 0;
+padding: 20px;
+}
+
+/* 🏷 PAGE TITLE */
+h2 {
+text-align: center;
+color: #333;
+margin-bottom: 20px;
+}
+
+/* 📦 ORDER CARD (COMMON FOR BOTH) */
+.order-card {
+background: #ffffff;
+padding: 15px;
+margin: 15px auto;
+border-radius: 12px;
+max-width: 500px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+transform: scale(1.02);
+}
+
+/* 🐟 ITEM TEXT */
+.order-card p {
+margin: 6px 0;
+color: #444;
+}
+
+/* 👤 USER NAME (ADMIN PAGE) */
+.order-user {
+font-weight: bold;
+color: #0077b6;
+}
+
+/* 📌 STATUS COMMON */
+.status {
+font-weight: bold;
+margin-top: 10px;
+}
+
+/* ⏳ PENDING */
+.status.pending {
+color: orange;
+}
+
+/* ✅ CONFIRMED */
+.status.confirmed {
+color: green;
+}
+
+/* ❌ REJECTED (future use) */
+.status.rejected {
+color: red;
+}
+
+/* 🔘 BUTTONS */
+button {
+padding: 8px 12px;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+margin-top: 10px;
+}
+
+/* ✅ CONFIRM BUTTON */
+.confirm-btn {
+background: #28a745;
+color: white;
+}
+
+.confirm-btn:hover {
+background: #218838;
+}
+
+/* ❌ REJECT BUTTON (optional future) */
+.reject-btn {
+background: #dc3545;
+color: white;
+}
+
+.reject-btn:hover {
+background: #c82333;
+}
+
+/* 📭 EMPTY MESSAGE */
+.empty-msg {
+text-align: center;
+font-size: 18px;
+color: #888;
+}
+
+.back-btn {
+    display: block;
+    margin: 10px auto 20px auto;
+    padding: 10px 15px;
+    background: #0077b6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #023e8a;
+}
+    </style>
+</head>
+<body>
+
+<h2>📦 Admin Orders</h2>
+	<button class="back-btn" onclick="goBack()">⬅ Back</button>
+<div id="ordersContainer"></div>
+
+<script src="adminOrders.js"></script>
+
+</body>
+</html>

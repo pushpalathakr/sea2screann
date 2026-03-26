@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Signup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page">
+
+<div class="container">
+
+<h2>Admin Registration</h2>
+
+<input type="text" id="userId" placeholder="User ID">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+<input type="text" id="address" placeholder="Address">
+<input type="text" id="license" placeholder="Enter License (KA-2024-123456)">
+<input type="text" id="phone" placeholder="Phone Number">
+
+<button onclick="registerAdmin()">Register</button>
+
+<p>Already have account? <a href="admin_login.html">Login</a></p>
+
+</div>
+
+<script>
+function validateLicense(license) {
+    // KA-2024-123456 format
+    let pattern = /^[A-Z]{2}-\d{4}-\d{6}$/;
+    return pattern.test(license);
+}
+
+function isDuplicateLicense(license) {
+
+    for (let key in localStorage) {
+
+        if (key.startsWith("admin_")) {
+            let admin = JSON.parse(localStorage.getItem(key));
+
+            if (admin && admin.license === license) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function registerAdmin() {
+
+    let userId = document.getElementById("userId").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let license = document.getElementById("license").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+
+    // ❌ EMPTY CHECK
+    if (!userId || !email || !password || !address || !license || !phone) {
+        alert("Please fill all fields ❌");
+        return;
+    }
+
+    // ❌ LICENSE FORMAT CHECK
+    if (!validateLicense(license)) {
+        alert("Invalid License ❌\nFormat: KA-2024-123456");
+        return;
+    }
+
+    // ❌ DUPLICATE LICENSE
+    if (isDuplicateLicense(license)) {
+        alert("License already exists ❌");
+        return;
+    }
+
+    let admin = {
+        userId,
+        email,
+        password,
+        address,
+        license,
+        phone
+    };
+
+    localStorage.setItem("admin_" + userId, JSON.stringify(admin));
+
+    alert("Registered Successfully ✅");
+    window.location.href = "admin_login.html";
+}
+</script>
+</body>
+</html>

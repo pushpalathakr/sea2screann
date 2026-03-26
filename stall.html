@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stall Details</title>
+	<style>.new-badge {
+    background: red;
+    color: white;
+    padding: 3px 6px;
+    font-size: 11px;
+    border-radius: 5px;
+    margin-left: 5px;
+}</style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 🔝 HEADER -->
+<div class="stall-header">
+    
+    <!-- 🏠 HOME BUTTON -->
+    <span class="home-link" onclick="goHome()">🏠 Home</span>
+	 <div class="header-actions">
+        <button onclick="goOrders()">📦 View Orders</button>
+        <button onclick="goCart()">🛒 View Cart</button>
+    </div>
+    <img id="stallImage" class="banner-img">
+
+    <div class="stall-header-info">
+        <h1 id="stallName"></h1>
+        <p id="stallLocation"></p>
+        <p id="stallRating"></p>
+
+        <a id="stallMap" target="_blank">
+            <button>📍 Map</button>
+        </a>
+    </div>
+</div>
+
+<!-- 📑 TABS -->
+<div class="tabs">
+    <button class="active" onclick="showTab('overview', this)">Overview</button>
+    <button onclick="showTab('menu', this)">Menu</button>
+    <button onclick="showTab('quick', this)">Quick Info</button>
+    <button onclick="showTab('services', this)">Services</button>
+    <button onclick="showTab('photos', this)">Photos</button>
+    <button onclick="showTab('reviews', this)">Reviews</button>
+</div>
+<!-- 📄 CONTENT -->
+
+<!-- OVERVIEW -->
+<div id="overview" class="tab-content">
+    <h3>Overview</h3>
+    <p>Fresh fish available daily 🐟</p>
+	 <p id="ovLocation"></p>
+    <p id="ovRating"></p>
+    <p id="ovTime"></p>
+
+    <h4>📞 Contact</h4>
+    <p id="ovPhone"></p>
+
+    <h4>🐟 Top Fish</h4>
+    <div id="ovMenu"></div>
+    <!-- 🗑 DELETE BUTTON -->
+    <button id="deleteBtn" class="delete-btn" onclick="deleteStall()">
+        Delete Stall 🗑️
+    </button>
+ 
+
+</div>
+
+<div id="menu" class="tab-content" style="display:none;">
+    <h3>🐟 Fish Menu</h3>
+<div class="sort-container">
+    <select id="menuSort" onchange="sortMenuItems()">
+        <option value="default">Sort Menu</option>
+        <option value="priceLow">Price Low → High</option>
+        <option value="priceHigh">Price High → Low</option>
+        <option value="name">Name (A → Z)</option>
+        <option value="qty">Quantity</option>
+        <option value="expire">Expiry Days</option>
+        <option value="new">New Arrival</option>
+    </select>
+</div>
+    <div class="menu-grid" id="menuContainer"></div>
+
+    <!-- ✅ ONLY BUTTON FOR ADMIN -->
+    <div id="adminMenuBox" style="display:none; margin-top:20px;">
+        <button onclick="goAddFishPage()">➕ Add New Fish</button>
+    </div>
+</div>
+
+<!-- QUICK INFO -->
+<div id="quick" class="tab-content" style="display:none;">
+    <h3>Quick Info</h3>
+	   <!-- ✅ ADMIN BUTTON -->
+    <button id="editQuickBtn" style="display:none;" onclick="editQuickInfo()">
+        ✏ Edit Info
+    </button>
+    <div id="quickContainer"></div>
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="tab-content" style="display:none;">
+    <h3>Services</h3>
+    <p>✔ Fresh Fish</p>
+    <p>✔ Cleaning Available</p>
+    <p>✔ Home Delivery</p>
+</div>
+
+<!-- PHOTOS -->
+<!-- PHOTOS -->
+<div id="photos" class="tab-content" style="display:none;">
+    <h3>📸 Photos</h3>
+
+    <!-- 🔥 REQUIRED INPUT -->
+    <input type="file" id="photoUpload" multiple hidden>
+
+    <!-- 🎯 SELECT BUTTON -->
+  <button id="chooseBtn" class="upload-btn" onclick="openUpload()">
+    📂 Choose Images
+</button>
+
+<button id="uploadBtn" class="upload-btn" onclick="uploadPhoto()">
+    ⬆ Upload Images
+</button>
+    <div id="photoGallery" class="photo-grid"></div>
+</div> <!-- ✅ IMPORTANT: CLOSE PHOTOS DIV -->
+
+<!-- REVIEWS -->
+<div id="reviews" class="tab-content" style="display:none;">
+    <h3>Reviews</h3>
+
+    <div id="reviewsList"></div>
+
+    <!-- USER INPUT -->
+    <textarea id="reviewInput" placeholder="Write review..."></textarea>
+
+    <div class="rating-box" id="ratingBox">
+        <span class="star" onclick="rate(1)">★</span>
+        <span class="star" onclick="rate(2)">★</span>
+        <span class="star" onclick="rate(3)">★</span>
+        <span class="star" onclick="rate(4)">★</span>
+        <span class="star" onclick="rate(5)">★</span>
+    </div>
+
+    <button id="reviewBtn" onclick="addReview()">Submit</button>
+</div>
+<script src="stall.js"></script>
+<!-- 🔍 IMAGE POPUP -->
+<div id="imagePopup" class="image-popup">
+    <span class="close-popup" onclick="closeImage()">❌</span>
+    <img id="popupImg">
+</div>
+</body>
+</html>
